@@ -18,7 +18,8 @@ from utils import (
     get_room_info,
     get_room_actuator_info,
     change_ac,
-    change_light
+    change_light,
+    get_optimization
 )
 
 app = Flask(__name__)
@@ -35,7 +36,8 @@ def home():
         "date": get_date(),
         "location": get_location(),
         "energy_values": get_energy_values(),
-        "initial_room_info": get_room_info(0)
+        "initial_room_info": get_room_info(0),
+        "optimization": get_optimization()
     }
 
     return jsonify(_response)

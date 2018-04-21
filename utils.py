@@ -1,5 +1,6 @@
 from datetime import date, datetime as dt
 
+optimization_applied = False
 
 ref_energy_values = [18,19,20.3,21,20.4,19.8,19.2,19.6,19.9,20.2,
                     19.9,19.3,20.2,20.9,21.3,22,23.3,24,23.9,23.8,
@@ -278,6 +279,14 @@ rooms = {
     }
 }
 
+def get_optimization():
+    return optimization_applied
+
+def toggle_optimization():
+    global optimization_applied
+    optimization_applied = not optimization_applied
+    return optimization_applied
+
 
 def get_energy_values():
     hours = dt.now().hour
@@ -295,7 +304,7 @@ def get_energy_values_week():
     energy_values = []
 
     for i in range(0, weeks):
-        energy_values.append(ref_energy_values_week)
+        energy_values.append(ref_energy_values_week[i])
 
     return energy_values
 
@@ -305,7 +314,7 @@ def get_energy_values_month():
     energy_values = []
 
     for i in range(0, months):
-        energy_values.append(ref_energy_values_month)
+        energy_values.append(ref_energy_values_month[i])
 
     return energy_values
 
@@ -315,7 +324,7 @@ def get_energy_values_month():
 ################
 
 def get_date():
-    return date.today()
+    return date.today().strftime('%d.%m.%y')
 
 def get_location():
     return "Helsinki"
@@ -407,15 +416,22 @@ def get_week_savings():
 def get_month_cost():
     current_month = dt.now().month
 
-    return ref_energy_values_month[current_month]
+    return ref_energy_values_month[current_month-1]
 
 def get_month_savings():
-    current_month = dt.now().month
+    current_month = dt.now().month - 1
+
+    print("current_month val")
+    print(ref_energy_values_month[current_month])
+    print("past_month val")
+    print(ref_energy_values_month[current_month-1])
+
 
     if current_month > 1:
 
+        print("month is greater than 1")
         current_month_cost = ref_energy_values_month[current_month]
-        past_month_cost = ref_energy_values_month[current_month - 1]
+        past_month_cost = ref_energy_values_month[current_month-1]
     
     else:
         current_month_cost = ref_energy_values_month[current_month]
@@ -423,6 +439,8 @@ def get_month_savings():
 
     savings = past_month_cost - current_month_cost
     savings = savings if savings > 0 else -savings        
+    
+    return savings
 
 
 ## Comparision helpers
