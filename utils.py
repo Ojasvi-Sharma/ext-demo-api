@@ -11,7 +11,7 @@ ref_energy_values_week = [
                     123.39,151.11,178.84,164.98,123.39,178.84,185.76,171.91,123.39,164.98,
                     178.84,178.84,130.32,137.26,164.98,164.98,137.26,144.19,151.11,171.91,
                     185.76,137.26,178.84,130.32,151.11,137.26,171.91,171.91,151.11,185.76,
-                    85.76,185.76,178.84,144.19,178.84,151.11,144.19,123.39,171.91,171.91,
+                    85.76,185.76,178.84,144.19,178.,151.11,144.19,123.39,171.91,171.91,
                     137.26,130.32]
 
 ref_energy_values_month = [
@@ -332,35 +332,35 @@ def get_location():
 def get_room_info(room_no):
     room_values = [
         {
-            "temperature": 23,
+            "temperature": 23, #kitchen
             "cost": 43
         },
         {
-            "temperature": 21,
+            "temperature": 21, #living room
             "cost": 46
         },
         {
-            "temperature": 22.3,
+            "temperature": 22.3, #laundry
             "cost": 44.7
         },
         {
-            "temperature": 25,
+            "temperature": 25, #office
             "cost": 36
         },
         {
-            "temperature": 18,
+            "temperature": 18, #bathroom
             "cost": 61
         },
         {
-            "temperature": 19,
+            "temperature": 19, #ironing room
             "cost": 56.3
         },
         {
-            "temperature": 20,
+            "temperature": 20, #tr
             "cost": 41.7
         },
         {
-            "temperature": 23,
+            "temperature": 23, #pr
             "cost": 43
         }
     ]

@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_pymongo import PyMongo
 
 from utils import (
     get_date, 
@@ -23,7 +24,7 @@ from utils import (
 )
 
 app = Flask(__name__)
-
+mongo = PyMongo(app)
 
 ################
 # Home endpoints
@@ -66,7 +67,8 @@ def history_day():
     _response = {
         "values": get_energy_values(),
         "cost": get_day_cost(),
-        "savings": get_day_savings()
+        "savings": get_day_savings(),
+        "compare": get_compare_day()
     }
     return jsonify(_response)
 
@@ -75,7 +77,8 @@ def history_week():
     _response = {
         "values": get_energy_values_week(),
         "cost": get_week_cost(),
-        "savings": get_week_savings()
+        "savings": get_week_savings(),
+        "compare": get_compare_week()
     }
     return jsonify(_response)
 
@@ -84,28 +87,10 @@ def history_month():
     _response = {
         "values": get_energy_values_month(),
         "cost": get_month_cost(),
-        "savings": get_month_savings()
+        "savings": get_month_savings(),
+        "compare": get_compare_month()
     }
     return jsonify(_response)
-
-
-## Compare routes
-
-@app.route('/history/compare/day', methods=['GET'])
-def history_compare_day():
-    _response = get_compare_day()
-    return jsonify(_response)
-
-@app.route('/history/compare/week', methods=['GET'])
-def history_compare_week():
-    _response = get_compare_week()
-    return jsonify(_response)
-
-@app.route('/history/compare/month', methods=['GET'])
-def history_compare_month():
-    _response = get_compare_month()
-    return jsonify(_response)
-
 
 ###################
 # Admin endpoints
